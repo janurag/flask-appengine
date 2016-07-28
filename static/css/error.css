@@ -1,0 +1,40 @@
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    font-family: 'Roboto', 'Helvetica Neue', 'Helvetica', sans-serif !important;
+}
+
+.header {
+    margin-top: 30px;
+}
+
+.header img {
+    height: 26px;
+}
+
+section {
+    margin-top: 100px;
+}
+
+.cloud-image {
+    margin-bottom: 40px;
+}
+
+.message {
+    font-size: 32px;
+    font-weight: 300;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.btn-default {
+    background-color: #f6f6f6 !important;
+    padding: 6px 16px !important;
+}
+
+
+@font-face
+{
+    font-family: 'Helvetica Neue';
+    src: url('../fonts/Helvetica-Neue/HelveticaNeue.ttf');
+}

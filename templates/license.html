@@ -1,0 +1,121 @@
+{% extends "dashboard.html" %} {% block title %}License History{% endblock %} {% block head %} {{ super() }}
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="../static/js/date.js"></script>
+<script type="text/javascript" src="../static/js/angular-google-charts.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js"></script>
+<script src="../static/js/ngSocket.js"></script>
+<script type="text/javascript" src="../static/js/clinic.js"></script> {% endblock %} {% block content %}
+<div class="row" id="clinic_container">
+    <div class="col-md-12">
+        <div class="row header">
+            <div class="col-md-3 left"></div>
+            <div class="col-md-9 right">
+                <a href="/clinics" type="button" class="btn btn-sm btn-default"><i class="material-icons">&#xE314;</i> Back</a>
+            </div>
+        </div>
+        <div class="row content" style="display:flex;">
+            <div class="col-md-3 left" style="">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="left-nav">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li role="presentation" class="active">
+                                    <a href="#/list">
+                                        <div class="row">
+                                            <div class="col-md-1">
+                                                <!-- <i class="material-icons">&#xE7FD;</i> -->
+                                                <i class="material-icons">&#xE8B0;</i>
+                                            </div>
+                                            <div class="col-md-9">
+                                                Your License History
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 right" style="padding-right:60px;">
+                <div class="expander-20" style="display: none;"></div>
+                <h3 class="page-heading">Your License History</h3>
+                <div class="expander-50"></div>
+                <table class="table table-striped table-hover">
+                <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                </tr>
+                {% for item in license %}
+                <tr>
+                    <td>{{item.get("start_date", None)}}</td>
+                    <td>{{item.get("end_date", None)}}</td>
+                    <td>
+                    {% if item.get("active", None)%}
+                        Active
+                    {% else %}
+                        Inactive
+                    {% endif%}
+                    </td>
+                </tr>
+
+                {% endfor %}
+                </table>
+                <!-- <form role="userForm" method="post" action="/user/profile">
+                <input type="hidden" name="id" value={{user.id}}>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" value={{user.firstname}} name="firstname" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" value={{user.lastname}} name="lastname" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="expander-20"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="email" value={{user.email}} class="form-control" name="email" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="expander-20"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Phone No</label>
+                                        <input type="text" value={{user.phone}} class="form-control" name="phone" ui-mask="999-999-9999" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expander-20"></div>
+                    <input type="submit" class="btn btn-primary btn-sm" value="Update User">
+                </form> -->
+                <!-- <div class="expander-20"></div>
+                <div class="expander-10"></div>
+                <h4>Change Password</h4>
+                <div class="expander-20"></div> -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+</script>
+{% endblock %}

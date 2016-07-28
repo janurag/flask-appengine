@@ -1,0 +1,113 @@
+<html>
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <script type="text/javascript" src="../static/js/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../static/js/angularjs.js"></script>
+    <script type="text/javascript" src="../static/js/angular-route.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/dashboard.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/dashboard.css">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:100,100italic,300,300italic,400,400italic,500,700">
+    <title>{% block title %}{% endblock %} - Datashop</title>
+    {% endblock %}
+</head>
+
+<body>
+    <div id="wrap">
+        <div class="clear-top" id="main">
+            <div class="row" style="z-index: 100;">
+                <div class="col-md-12">
+                    <div class="navbar page-header navbar-fixed-top">
+                        <div class="container-fluid" ng-app="Datashop">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="/clinics">
+                                    <img src="../../static/images/datashop-care.png" class="datashop-logo">
+                                </a>
+                            </div>
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav" ng-controller="navbarController">
+                                    <li>
+                                        <h4>Pipeline Dashboard</h4>
+                                    </li>
+                                    <li>
+                                        <a href="/clinics" class="navigation" ng-if="role.clinic()" ng-class="getClass('/clinics/')">
+											Clinics
+										</a>
+                                    </li>
+                                    <li>
+                                        <a href="/alerts" class="navigation" ng-if="role.alerts()" ng-class="getClass('/alerts/')">
+											Alerts
+										</a>
+                                    </li>
+                                    <li>
+                                        <a href="/admin" class="navigation" ng-if="role.user() == true" ng-class="getClass('/admin/')">
+											Admin
+										</a>
+                                    </li>
+                                    <li>
+                                        <a href="/analytics" class="navigation" ng-if="role.analytical()" ng-class="getClass('/analytics/')">
+											Analytics
+										</a>
+                                    </li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right" ng-controller="UserController">
+                                    <li class="dropdown">
+
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <span style="line-height: 22px;">{{"{{user.getFullName()}}"}}</span>
+                                            <div class="notification-count" ng-class="{'red':notifications.count > 0}">{{"{{notifications.count}}"}}</div>
+                                        </a>
+                                        <ul class="dropdown-menu notifications" style="width:250px;">
+                                            <li ng-if="notifications.count > 0">
+                                                <a>All notifications</a>
+                                            </li>
+                                            <li ng-repeat="item in notifications.data">
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        <i class="material-icons" style="font-size:15px;line-height:18px">&#xE7F4;</i>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <span>{{"{{item.hospital_code}}"}}</span> generated <span>{{"{{item.alert_policy}}"}}.</span>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <i class="material-icons" ng-click="read_notification(item.id)" style="font-size:15px;line-height:18px; cursor:pointer;">&#xE5CD;</i>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="menu" style="border-bottom: solid 1px #DADADA !important;" ng-if="notifications.count > 0">
+                                                <a ng-click="clear_all_notifications()">Clear all notifications</a>
+                                            </li>
+                                            <li class="menu" style="padding-top:9px;">
+                                                <a href="/user/profile">Profile</a>
+                                            </li>
+                                            <li class="menu">
+                                                <a href="/user/licenses">Licenses</a>
+                                            </li>
+                                            <li class="menu">
+                                                <a href="/help">Help</a>
+                                            </li>
+                                            <li class="menu">
+                                                <a href="/user/logout">Logout</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <div class="footer-parent">
+    </div>
+</body>
+<style></style>
+
+</html>
