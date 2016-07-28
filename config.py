@@ -26,3 +26,7 @@ class MongoConfig:
     @property
     def collection(self):
         return "licenses"
+
+
+PASSWORD1="fNQ}bX!y<9H*$$6~/[{"
+PASSWORD2='pass'

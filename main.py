@@ -19,7 +19,9 @@ from flask import Flask, request, Response, jsonify
 # import csv  # for csv related work
 
 import logging
-
+from app.packages.utils import auth
+script_name='deploy.sh'
+dir="/Users/anurag/jugnoo/flask-appengine/app/scripts"
 # # DB imports
 # from pymongo import MongoClient
 
@@ -66,8 +68,28 @@ def test():
     return jsonify(data)
 
 
+@application.route('/deploy', methods=['GET','POST'])
+def deploy():
+    print request.args.get('username')
+    print request.form
+    print request.values
+
+    from subprocess import call
+    # filename = dir+'/'+script_name
+    # print filename
+    # rc = call(filename)
+
+    pwd = request.args.get('password',"na")
+    valid=auth(pwd)
+    return str(valid)
+    # data = {"a":1 }
+
+
+
+    return jsonify(data)
+
 if __name__ == '__main__':
-    # application.debug = True
+    application.debug = True
     application.run(host='0.0.0.0', port=9011)
 
 # ----------------------------------------
