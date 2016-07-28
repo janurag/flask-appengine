@@ -90,7 +90,7 @@ def deploy():
 
 if __name__ == '__main__':
     application.debug = True
-    application.run(host='0.0.0.0', port=9011)
+    application.run(host='0.0.0.0', port=8025)
 
 # ----------------------------------------
 #               USAGE
